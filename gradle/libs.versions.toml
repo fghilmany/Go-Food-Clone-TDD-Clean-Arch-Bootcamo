@@ -1,0 +1,58 @@
+[versions]
+# Plugin
+androidGradlePlugin = "8.1.1"
+kotlinAandroid = "1.9.0"
+lifecyle = "2.6.2"
+
+# Http
+retrofit = "2.9.0"
+moshi = "1.15.0"
+loggingInterceptor = "4.10.0"
+
+# Testing
+junit = "4.13.2"
+extJunit = "1.1.5"
+espressoCore = "3.5.1"
+
+# UI
+material = "1.9.0"
+appcompat = "1.6.1"
+
+# Image Loader
+glide = "4.16.0"
+core-ktx = "1.9.0"
+constraintlayout = "2.1.4"
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinAandroid" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
+
+[libraries]
+android-ktx = {group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+
+# Http
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+okhttp = { module = "com.squareup.okhttp3:okhttp" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
+
+# UI
+appCompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+
+# Testing
+junit = { module = "junit:junit", version.ref = "junit" }
+extJunit = { module = "androidx.test.ext:junit", version.ref = "extJunit" }
+espressoCore = { module = "androidx.test.espresso:espresso-core", version.ref = "espressoCore" }
+
+# Lifecycle
+lifecycle-viemodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecyle" }
+lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecyle" }
+
+# Image Loader
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+

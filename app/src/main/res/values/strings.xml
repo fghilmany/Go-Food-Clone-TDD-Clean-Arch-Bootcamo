@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Go Food Clone</string>
+    <string name="login">Login</string>
+    <string name="kalo_udah_punya_akun_langsung_masuk_aja_gan">Kalo udah punya akun langsung masuk aja gan</string>
+    <string name="cth_nama_email_com">Cth: nama@email.com</string>
+    <string name="email">Email <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="name">Nama <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="phone_number">Nomor HP <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="address_form">Alamat <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="house_number">Nomor Rumah <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="city">Kota <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="password">Kata Sandi <font color='@android:color/red'><sup>*</sup></font></string>
+    <string name="berupa_huruf_angka">Berupa huruf/angka</string>
+    <string name="Register">Buat Akun</string>
+    <string name="daftar">Daftar</string>
+    <string name="buat_akun_baru_dulu_baru_cekot_makanan">Buat akun baru dulu baru cekot makanan.</string>
+    <string name="next">Lanjut</string>
+    <string name="huruf_alfabet_tanpa_emoji_simbol">Huruf alfabet, tanpa emoji/simbol</string>
+    <string name="address">Alamat</string>
+    <string name="lengkapi_alamat_kamu_buat_lanjut_daftar_akunnya">Lengkapi alamat kamu buat lanjut daftar akunnya.</string>
+    <string name="_08xxxxxxxxxx">08xxxxxxxxxx</string>
+    <string name="alamat_kamu">Alamat Kamu</string>
+    <string name="nomor_rumah_kamu">Nomor Rumah Kamu</string>
+    <string name="pilih_kota">Pilih Kota</string>
+    <string name="register_now">Daftar sekarang</string>
+</resources>
