@@ -29,39 +29,26 @@ class RegisterRetrofitClientTest{
 
     @Test
     fun testGetFailsOnConnectivityError() = runBlocking {
-        val body = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
+        expect(
+            sut = sut,
+            expectedResult = ConnectivityException()
         )
-        coEvery {
-            service.register(body)
-        } throws IOException()
-        sut.register(body).test {
-            when(val receivedResult = awaitItem()){
-                is HttpClientResult.Success -> {
-                    // TODO
-                }
-                is HttpClientResult.Failure -> {
-                    assertEquals(ConnectivityException()::class.java, receivedResult.throwable::class.java)
-                }
-            }
-            awaitComplete()
-        }
-
-        coVerify(exactly = 1) {
-            service.register(body)
-        }
-        confirmVerified(service)
     }
 
     @Test
     fun testGetFailsOn404HttpResponse() = runBlocking{
+        expect(
+            withStatusCode = 404,
+            sut = sut,
+            expectedResult = NotFoundExceptionException()
+        )
+    }
+
+    private fun expect(
+        withStatusCode: Int? = null,
+        sut: RegisterRetrofitClient,
+        expectedResult: Any
+    ) = runBlocking {
         val body = RemoteRegisterBody(
             "123",
             "123",
@@ -72,14 +59,25 @@ class RegisterRetrofitClientTest{
             "17",
             "acuy@email.com",
         )
-        val response = Response.error<RemoteRegisterResponse>(
-            404,
-            "".toResponseBody(null)
-        )
+        when{
+            withStatusCode != null -> {
+                val response = Response.error<RemoteRegisterResponse>(
+                    withStatusCode,
+                    "".toResponseBody(null)
+                )
 
-        coEvery {
-            service.register(body)
-        } throws HttpException(response)
+                coEvery {
+                    service.register(body)
+                } throws HttpException(response)
+            }
+
+            expectedResult is ConnectivityException -> {
+                coEvery {
+                    service.register(body)
+                } throws IOException()
+            }
+        }
+
 
         sut.register(body).test {
             when(val receivedResult = awaitItem()){
@@ -87,7 +85,7 @@ class RegisterRetrofitClientTest{
                     // TODO
                 }
                 is HttpClientResult.Failure -> {
-                    assertEquals(NotFoundExceptionException()::class.java, receivedResult.throwable::class.java)
+                    assertEquals(expectedResult::class.java, receivedResult.throwable::class.java)
                 }
             }
             awaitComplete()
@@ -98,5 +96,6 @@ class RegisterRetrofitClientTest{
         }
         confirmVerified(service)
     }
+
 
 }
