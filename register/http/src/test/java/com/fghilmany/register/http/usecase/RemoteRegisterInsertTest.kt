@@ -8,6 +8,7 @@ import com.fghilmany.common.InvalidDataException
 import com.fghilmany.register.domain.RegisterBody
 import com.fghilmany.register.http.RegisterHttpClient
 import com.fghilmany.register.http.RemoteRegisterBody
+import com.fghilmany.register.http.RemoteRegisterResponse
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.spyk
@@ -126,50 +127,30 @@ class RemoteRegisterInsertTest{
 
     @Test
     fun testLoadDeliversInvalidDataError() = runBlocking {
-        val remoteBody = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
+        expect(
+            sut = sut,
+            receivedHttpClientResult = HttpClientResult.Failure(InvalidDataException()),
+            expectedResult = "Invalid Data",
+            exactly = 1
         )
-        val body = RegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
-        every {
-            client.register(remoteBody)
-        } returns flowOf(HttpClientResult.Failure(InvalidDataException()))
-
-        sut.register(body).test {
-            when(val receivedResult = awaitItem()){
-                is DataResult.Success -> {
-                    //Todo
-                }
-                is DataResult.Failure -> {
-                    assertEquals("Invalid Data", receivedResult.errorMessage)
-                }
-            }
-            awaitComplete()
-        }
-
-        verify(exactly = 1) {
-            client.register(remoteBody)
-        }
-
-        confirmVerified(client)
     }
     @Test
     fun testLoadDeliversConnectivityError() = runBlocking {
+        expect(
+            sut = sut,
+            receivedHttpClientResult = HttpClientResult.Failure(ConnectivityException()),
+            expectedResult = "Connectivity",
+            exactly = 1
+        )
+    }
+
+    private fun expect(
+        sut: RemoteRegisterInsert,
+        receivedHttpClientResult: HttpClientResult<RemoteRegisterResponse>,
+        expectedResult: Any,
+        exactly: Int = -1,
+    ) = runBlocking {
+
         val remoteBody = RemoteRegisterBody(
             "123",
             "123",
@@ -192,7 +173,7 @@ class RemoteRegisterInsertTest{
         )
         every {
             client.register(remoteBody)
-        } returns flowOf(HttpClientResult.Failure(ConnectivityException()))
+        } returns flowOf(receivedHttpClientResult)
 
         sut.register(body).test {
             when(val receivedResult = awaitItem()){
@@ -200,16 +181,17 @@ class RemoteRegisterInsertTest{
                     //Todo
                 }
                 is DataResult.Failure -> {
-                    assertEquals("Connectivity", receivedResult.errorMessage)
+                    assertEquals(expectedResult, receivedResult.errorMessage)
                 }
             }
             awaitComplete()
         }
 
-        verify(exactly = 1) {
+        verify(exactly = exactly) {
             client.register(remoteBody)
         }
 
         confirmVerified(client)
+
     }
 }
