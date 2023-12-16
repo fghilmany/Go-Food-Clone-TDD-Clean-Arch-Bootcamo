@@ -172,6 +172,15 @@ class RegisterViewModelTest{
         )
     }
 
+    @Test
+    fun testLoadFailedUnexpectedErrorShowsError() = runBlocking {
+        expect(
+            result = DataResult.Failure("Something went wrong"),
+            sut = sut,
+            expectedFailedResult = "Something went wrong"
+        )
+    }
+
     private fun expect(
         result: DataResult<RegisterData>,
         sut: RegisterViewModel,
