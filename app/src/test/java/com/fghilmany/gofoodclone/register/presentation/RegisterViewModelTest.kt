@@ -155,6 +155,14 @@ class RegisterViewModelTest{
             expectedFailedResult = "Invalid Data"
         )
     }
+    @Test
+    fun testLoadFailedNotFoundErrorShowsError() = runBlocking {
+        expect(
+            result = DataResult.Failure("Not Found"),
+            sut = sut,
+            expectedFailedResult = "Not Found"
+        )
+    }
 
     private fun expect(
         result: DataResult<RegisterData>,
