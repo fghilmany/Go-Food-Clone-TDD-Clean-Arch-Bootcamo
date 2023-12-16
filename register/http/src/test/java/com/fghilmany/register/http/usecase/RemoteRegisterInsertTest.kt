@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.fghilmany.common.ConnectivityException
 import com.fghilmany.common.DataResult
 import com.fghilmany.common.HttpClientResult
+import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
 import com.fghilmany.register.domain.RegisterBody
@@ -100,6 +101,16 @@ class RemoteRegisterInsertTest{
             sut = sut,
             receivedHttpClientResult = HttpClientResult.Failure(NotFoundExceptionException()),
             expectedResult = "Not Found",
+            exactly = 1
+        )
+    }
+
+    @Test
+    fun testLoadDeliversInternalServerError() = runBlocking {
+        expect(
+            sut = sut,
+            receivedHttpClientResult = HttpClientResult.Failure(InternalServerErrorException()),
+            expectedResult = "Internal Server Error",
             exactly = 1
         )
     }
