@@ -14,12 +14,14 @@ import com.fghilmany.register.http.RegisterHttpClient
 import com.fghilmany.register.http.RemoteRegisterData
 import com.fghilmany.register.http.RemoteRegisterResponse
 import com.fghilmany.register.http.User
+import io.mockk.clearAllMocks
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.spyk
 import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -177,6 +179,11 @@ class RemoteRegisterInsertTest{
             expectedResult = DataResult.Success(remoteRegisterResponse),
             exactly = 1
         )
+    }
+
+    @After
+    fun tearDown() {
+        clearAllMocks()
     }
 
     private fun expect(
