@@ -182,6 +182,51 @@ class RegisterViewModelTest{
         confirmVerified(useCase)
     }
 
+    @Test
+    fun testLoadFailedInvalidDataErrorShowsError() = runBlocking {
+        val body = RegisterBody(
+            "123",
+            "123",
+            "Bandung",
+            "082134",
+            "Bandung",
+            "Acuy",
+            "17",
+            "acuy@email.com",
+        )
+
+        every {
+            useCase.register(body)
+        } returns flowOf(DataResult.Failure("Invalid Data"))
+
+        sut.setRegisterBody(
+            "123",
+            "123",
+            "Bandung",
+            "082134",
+            "Bandung",
+            "Acuy",
+            "17",
+            "acuy@email.com",
+        )
+        sut.register()
+
+        when(val receivedValue = sut.register.getOrAwaitValue()){
+            is DataResult.Success -> {
+                // TODO
+            }
+            is DataResult.Failure -> {
+                assertEquals("Invalid Data", receivedValue.errorMessage)
+            }
+        }
+
+        verify(exactly = 1) {
+            useCase.register(body)
+        }
+
+        confirmVerified(useCase)
+    }
+
     @VisibleForTesting(otherwise = VisibleForTesting.NONE)
     fun <T> LiveData<T>.getOrAwaitValue(
         time: Long = 2,
