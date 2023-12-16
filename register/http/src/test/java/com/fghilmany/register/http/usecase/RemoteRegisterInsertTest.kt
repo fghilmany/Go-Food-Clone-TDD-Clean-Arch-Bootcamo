@@ -56,26 +56,6 @@ class RemoteRegisterInsertTest{
     }
     @Test
     fun testLoadTwiceRequestsDataTwice() = runBlocking{
-        val remoteBody = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
-        val body = RegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
 
         every {
             client.register(remoteBody)
