@@ -7,9 +7,7 @@ import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
-import com.fghilmany.register.domain.RegisterBody
 import com.fghilmany.register.http.RegisterHttpClient
-import com.fghilmany.register.http.RemoteRegisterBody
 import com.fghilmany.register.http.RemoteRegisterResponse
 import io.mockk.confirmVerified
 import io.mockk.every
@@ -122,26 +120,6 @@ class RemoteRegisterInsertTest{
         exactly: Int = -1,
     ) = runBlocking {
 
-        val remoteBody = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
-        val body = RegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
         every {
             client.register(remoteBody)
         } returns flowOf(receivedHttpClientResult)
