@@ -163,6 +163,14 @@ class RegisterViewModelTest{
             expectedFailedResult = "Not Found"
         )
     }
+    @Test
+    fun testLoadFailedInternalServerErrorShowsError() = runBlocking {
+        expect(
+            result = DataResult.Failure("Internal Server Error"),
+            sut = sut,
+            expectedFailedResult = "Internal Server Error"
+        )
+    }
 
     private fun expect(
         result: DataResult<RegisterData>,
