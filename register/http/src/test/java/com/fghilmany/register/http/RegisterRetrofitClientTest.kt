@@ -3,6 +3,7 @@ package com.fghilmany.register.http
 import app.cash.turbine.test
 import com.fghilmany.common.ConnectivityException
 import com.fghilmany.common.HttpClientResult
+import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
 import io.mockk.coEvery
@@ -50,6 +51,15 @@ class RegisterRetrofitClientTest{
             withStatusCode = 422,
             sut = sut,
             expectedResult = InvalidDataException()
+        )
+    }
+
+    @Test
+    fun testGetFailsOn500HttpResponse() = runBlocking{
+        expect(
+            withStatusCode = 500,
+            sut = sut,
+            expectedResult = InternalServerErrorException()
         )
     }
 
