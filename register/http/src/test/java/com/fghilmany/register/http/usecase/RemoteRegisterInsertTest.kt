@@ -78,4 +78,44 @@ class RemoteRegisterInsertTest{
 
         confirmVerified(client)
     }
+    @Test
+    fun testLoadTwiceRequestsDataTwice() = runBlocking{
+        val remoteBody = RemoteRegisterBody(
+            "123",
+            "123",
+            "Bandung",
+            "082134",
+            "Bandung",
+            "Acuy",
+            "17",
+            "acuy@email.com",
+        )
+        val body = RegisterBody(
+            "123",
+            "123",
+            "Bandung",
+            "082134",
+            "Bandung",
+            "Acuy",
+            "17",
+            "acuy@email.com",
+        )
+
+        every {
+            client.register(remoteBody)
+        } returns flowOf()
+
+        sut.register(body).test{
+            awaitComplete()
+        }
+        sut.register(body).test{
+            awaitComplete()
+        }
+
+        verify(exactly = 2) {
+            client.register(remoteBody)
+        }
+
+        confirmVerified(client)
+    }
 }
