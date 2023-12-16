@@ -7,8 +7,13 @@ import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
+import com.fghilmany.register.domain.RegisterData
+import com.fghilmany.register.domain.RegisterUser
+import com.fghilmany.register.http.Meta
 import com.fghilmany.register.http.RegisterHttpClient
+import com.fghilmany.register.http.RemoteRegisterData
 import com.fghilmany.register.http.RemoteRegisterResponse
+import com.fghilmany.register.http.User
 import io.mockk.confirmVerified
 import io.mockk.every
 import io.mockk.spyk
@@ -113,6 +118,67 @@ class RemoteRegisterInsertTest{
         )
     }
 
+    @Test
+    fun testLoadDeliversItemsOn200HttpResponseWithResponse() {
+        val remoteRegisterData = RemoteRegisterData(
+            "298|Ml5yvMueZ5f1xeg8C2a3h6Iaw6sBJrwMT0lwrOMa",
+            "Bearer",
+            User(
+                "https://ui-avatars.com/api/?name=acuy&color=7F9CF5&background=EBF4FF",
+                "Jalan berkah",
+                "Berlin",
+                "USER",
+                "1",
+                1702725827000,
+                null,
+                null,
+                "1",
+                1702725827000,
+                "acuy",
+                133,
+                null,
+                "hightech@gmaisl.com",
+            )
+        )
+
+        val remoteMeta = Meta(
+            200,
+            "success",
+            "User Registered",
+        )
+
+        val remoteRegisterResponse = RegisterData(
+            "298|Ml5yvMueZ5f1xeg8C2a3h6Iaw6sBJrwMT0lwrOMa",
+            "Bearer",
+            RegisterUser(
+                "https://ui-avatars.com/api/?name=acuy&color=7F9CF5&background=EBF4FF",
+                "Jalan berkah",
+                "Berlin",
+                "USER",
+                "1",
+                1702725827000,
+                null,
+                null,
+                "1",
+                1702725827000,
+                "acuy",
+                133,
+                null,
+                "hightech@gmaisl.com",
+            )
+        )
+
+        expect(
+            sut = sut,
+            receivedHttpClientResult = HttpClientResult.Success(RemoteRegisterResponse(
+                remoteRegisterData,
+                remoteMeta
+            )),
+            expectedResult = DataResult.Success(remoteRegisterResponse),
+            exactly = 1
+        )
+    }
+
     private fun expect(
         sut: RemoteRegisterInsert,
         receivedHttpClientResult: HttpClientResult<RemoteRegisterResponse>,
@@ -127,7 +193,7 @@ class RemoteRegisterInsertTest{
         sut.register(body).test {
             when(val receivedResult = awaitItem()){
                 is DataResult.Success -> {
-                    //Todo
+                    assertEquals(expectedResult::class.java, receivedResult::class.java)
                 }
                 is DataResult.Failure -> {
                     assertEquals(expectedResult, receivedResult.errorMessage)
