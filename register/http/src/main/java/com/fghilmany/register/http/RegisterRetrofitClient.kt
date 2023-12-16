@@ -5,6 +5,7 @@ import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
+import com.fghilmany.common.UnexpectedException
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
@@ -30,7 +31,7 @@ class RegisterRetrofitClient constructor(
                         }
                     }
                     else -> {
-                        emit(HttpClientResult.Failure(InvalidDataException()))
+                        emit(HttpClientResult.Failure(UnexpectedException()))
                     }
                 }
             }

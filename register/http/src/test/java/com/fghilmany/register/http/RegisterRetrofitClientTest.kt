@@ -6,6 +6,7 @@ import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
+import com.fghilmany.common.UnexpectedException
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.confirmVerified
@@ -60,6 +61,13 @@ class RegisterRetrofitClientTest{
             withStatusCode = 500,
             sut = sut,
             expectedResult = InternalServerErrorException()
+        )
+    }
+    @Test
+    fun testGetFailsOnUnexpectedException() = runBlocking{
+        expect(
+            sut = sut,
+            expectedResult = UnexpectedException()
         )
     }
 
