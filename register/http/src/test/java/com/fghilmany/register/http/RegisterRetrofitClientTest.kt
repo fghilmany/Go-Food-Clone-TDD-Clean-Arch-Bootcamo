@@ -3,6 +3,7 @@ package com.fghilmany.register.http
 import app.cash.turbine.test
 import com.fghilmany.common.ConnectivityException
 import com.fghilmany.common.HttpClientResult
+import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -41,6 +42,14 @@ class RegisterRetrofitClientTest{
             withStatusCode = 404,
             sut = sut,
             expectedResult = NotFoundExceptionException()
+        )
+    }
+    @Test
+    fun testGetFailsOn422HttpResponse() = runBlocking{
+        expect(
+            withStatusCode = 422,
+            sut = sut,
+            expectedResult = InvalidDataException()
         )
     }
 
