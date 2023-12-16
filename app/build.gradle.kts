@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.testingCore)
 
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
