@@ -5,6 +5,7 @@ import com.fghilmany.common.ConnectivityException
 import com.fghilmany.common.DataResult
 import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InvalidDataException
+import com.fghilmany.common.NotFoundExceptionException
 import com.fghilmany.register.domain.RegisterBody
 import com.fghilmany.register.http.RegisterHttpClient
 import com.fghilmany.register.http.RemoteRegisterBody
@@ -90,6 +91,15 @@ class RemoteRegisterInsertTest{
             sut = sut,
             receivedHttpClientResult = HttpClientResult.Failure(ConnectivityException()),
             expectedResult = "Connectivity",
+            exactly = 1
+        )
+    }
+    @Test
+    fun testLoadDeliversNotFoundError() = runBlocking {
+        expect(
+            sut = sut,
+            receivedHttpClientResult = HttpClientResult.Failure(NotFoundExceptionException()),
+            expectedResult = "Not Found",
             exactly = 1
         )
     }
