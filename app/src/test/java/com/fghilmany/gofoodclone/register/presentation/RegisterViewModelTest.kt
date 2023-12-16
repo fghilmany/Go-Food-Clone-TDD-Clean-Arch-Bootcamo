@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import com.fghilmany.common.DataResult
 import com.fghilmany.register.domain.RegisterBody
+import com.fghilmany.register.domain.RegisterData
 import com.fghilmany.register.domain.RegisterInsert
 import io.mockk.clearAllMocks
 import io.mockk.confirmVerified
@@ -139,51 +140,27 @@ class RegisterViewModelTest{
 
     @Test
     fun testLoadFailedConnectivity() = runBlocking {
-        val body = RegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
+        expect(
+            result = DataResult.Failure("Connectivity"),
+            sut = sut,
+            expectedFailedResult = "Connectivity"
         )
-
-        every {
-            useCase.register(body)
-        } returns flowOf(DataResult.Failure("Connectivity"))
-
-        sut.setRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
-        sut.register()
-
-        when(val receivedValue = sut.register.getOrAwaitValue()){
-            is DataResult.Success -> {
-                // TODO
-            }
-            is DataResult.Failure -> {
-                assertEquals("Connectivity", receivedValue.errorMessage)
-            }
-        }
-
-        verify(exactly = 1) {
-            useCase.register(body)
-        }
-
-        confirmVerified(useCase)
     }
 
     @Test
     fun testLoadFailedInvalidDataErrorShowsError() = runBlocking {
+        expect(
+            result = DataResult.Failure("Invalid Data"),
+            sut = sut,
+            expectedFailedResult = "Invalid Data"
+        )
+    }
+
+    private fun expect(
+        result: DataResult<RegisterData>,
+        sut: RegisterViewModel,
+        expectedFailedResult: String
+    ) {
         val body = RegisterBody(
             "123",
             "123",
@@ -197,7 +174,7 @@ class RegisterViewModelTest{
 
         every {
             useCase.register(body)
-        } returns flowOf(DataResult.Failure("Invalid Data"))
+        } returns flowOf(result)
 
         sut.setRegisterBody(
             "123",
@@ -216,7 +193,7 @@ class RegisterViewModelTest{
                 // TODO
             }
             is DataResult.Failure -> {
-                assertEquals("Invalid Data", receivedValue.errorMessage)
+                assertEquals(expectedFailedResult, receivedValue.errorMessage)
             }
         }
 
