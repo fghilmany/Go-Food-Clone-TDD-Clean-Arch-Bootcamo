@@ -14,6 +14,8 @@ import com.fghilmany.register.http.RegisterHttpClient
 import com.fghilmany.register.http.RemoteRegisterData
 import com.fghilmany.register.http.RemoteRegisterResponse
 import com.fghilmany.register.http.User
+import com.fghilmany.register.http.body
+import com.fghilmany.register.http.remoteBody
 import io.mockk.clearAllMocks
 import io.mockk.confirmVerified
 import io.mockk.every

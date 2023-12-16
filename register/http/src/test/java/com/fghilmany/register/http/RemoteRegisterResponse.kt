@@ -1,4 +1,4 @@
-package com.fghilmany.register.http.usecase
+package com.fghilmany.register.http
 
 import com.fghilmany.register.domain.RegisterBody
 import com.fghilmany.register.http.RemoteRegisterBody

@@ -49,16 +49,7 @@ class RegisterRetrofitClientTest{
         sut: RegisterRetrofitClient,
         expectedResult: Any
     ) = runBlocking {
-        val body = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
+
         when{
             withStatusCode != null -> {
                 val response = Response.error<RemoteRegisterResponse>(
@@ -67,19 +58,19 @@ class RegisterRetrofitClientTest{
                 )
 
                 coEvery {
-                    service.register(body)
+                    service.register(remoteBody)
                 } throws HttpException(response)
             }
 
             expectedResult is ConnectivityException -> {
                 coEvery {
-                    service.register(body)
+                    service.register(remoteBody)
                 } throws IOException()
             }
         }
 
 
-        sut.register(body).test {
+        sut.register(remoteBody).test {
             when(val receivedResult = awaitItem()){
                 is HttpClientResult.Success -> {
                     // TODO
@@ -92,7 +83,7 @@ class RegisterRetrofitClientTest{
         }
 
         coVerify(exactly = 1) {
-            service.register(body)
+            service.register(remoteBody)
         }
         confirmVerified(service)
     }
