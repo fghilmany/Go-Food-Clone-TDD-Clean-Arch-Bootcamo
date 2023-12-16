@@ -30,18 +30,8 @@ class RemoteRegisterInsertTest{
 
     @Test
     fun testInitDoesNotRequestData(){
-        val body = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
         verify(exactly = 0) {
-            client.register(body)
+            client.register(remoteBody)
         }
 
         confirmVerified(client)
@@ -49,26 +39,6 @@ class RemoteRegisterInsertTest{
 
     @Test
     fun testLoadRequestsData() = runBlocking{
-        val remoteBody = RemoteRegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
-        val body = RegisterBody(
-            "123",
-            "123",
-            "Bandung",
-            "082134",
-            "Bandung",
-            "Acuy",
-            "17",
-            "acuy@email.com",
-        )
 
         every {
             client.register(remoteBody)
