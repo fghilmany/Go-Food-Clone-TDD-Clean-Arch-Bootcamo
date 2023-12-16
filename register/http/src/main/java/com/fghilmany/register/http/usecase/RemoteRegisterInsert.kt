@@ -27,6 +27,7 @@ class RemoteRegisterInsert(
                     is HttpClientResult.Success -> {
                         val register = result.root
                         emit(DataResult.Success(register.remoteRegisterData.mapToRegisterData()))
+
                     }
                     is HttpClientResult.Failure -> {
                         when(result.throwable){
