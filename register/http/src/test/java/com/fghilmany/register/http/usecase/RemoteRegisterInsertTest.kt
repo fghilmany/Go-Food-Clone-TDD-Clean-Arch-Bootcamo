@@ -7,6 +7,7 @@ import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
+import com.fghilmany.common.UnexpectedException
 import com.fghilmany.register.domain.RegisterData
 import com.fghilmany.register.domain.RegisterUser
 import com.fghilmany.register.http.Meta
@@ -118,6 +119,16 @@ class RemoteRegisterInsertTest{
             sut = sut,
             receivedHttpClientResult = HttpClientResult.Failure(InternalServerErrorException()),
             expectedResult = "Internal Server Error",
+            exactly = 1
+        )
+    }
+
+    @Test
+    fun testLoadDeliversUnexpectedError() = runBlocking {
+        expect(
+            sut = sut,
+            receivedHttpClientResult = HttpClientResult.Failure(UnexpectedException()),
+            expectedResult = "Something went wrong",
             exactly = 1
         )
     }

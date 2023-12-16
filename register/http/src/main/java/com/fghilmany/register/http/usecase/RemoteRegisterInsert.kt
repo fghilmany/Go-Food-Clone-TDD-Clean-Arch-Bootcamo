@@ -6,12 +6,13 @@ import com.fghilmany.common.HttpClientResult
 import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
+import com.fghilmany.common.UnexpectedException
 import com.fghilmany.register.domain.RegisterBody
 import com.fghilmany.register.domain.RegisterData
 import com.fghilmany.register.domain.RegisterInsert
+import com.fghilmany.register.http.RegisterHttpClient
 import com.fghilmany.register.http.RegisterMapper.Companion.mapToRegisterData
 import com.fghilmany.register.http.RegisterMapper.Companion.mapToRemoteBody
-import com.fghilmany.register.http.RegisterHttpClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -40,6 +41,9 @@ class RemoteRegisterInsert(
                             }
                             is InternalServerErrorException -> {
                                 emit(DataResult.Failure("Internal Server Error"))
+                            }
+                            is UnexpectedException -> {
+                                emit(DataResult.Failure("Something went wrong"))
                             }
                         }
                     }
