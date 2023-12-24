@@ -47,6 +47,7 @@ dependencies {
     // register module
     implementation(project(":register:domain"))
     implementation(project(":register:http"))
+    implementation(project(":register:presentation"))
 
     // preference module
     implementation(project(":preference:domain"))
