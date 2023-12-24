@@ -35,10 +35,19 @@ android {
 
 dependencies {
 
+    // register module
+    implementation(project(":login:domain"))
+
+    // common module
+    implementation(project(":common"))
+
     implementation(libs.android.ktx)
     implementation(libs.appCompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.extJunit)
     androidTestImplementation(libs.espressoCore)
+
+    implementation(libs.lifecycle.viemodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
 }
