@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.fghilamny.register.presentation.RegisterViewModel
 import com.fghilmany.common.DataResult
 import com.fghilmany.gofoodclone.databinding.ActivityRegisterBinding
 import com.fghilmany.gofoodclone.home.ui.HomeActivity
-
-import com.fghilmany.gofoodclone.register.presentation.RegisterViewModel
+import com.fghilmany.gofoodclone.main.factories.viewmodel.RegisterViewModelFactory
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -31,7 +31,7 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, RegisterViewModel.FACTORY)[RegisterViewModel::class.java]
+        viewModel = ViewModelProvider(this, RegisterViewModelFactory.createRegisterViewModelFactory())[RegisterViewModel::class.java]
 
         clickEvent()
         observeData()

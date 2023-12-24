@@ -1,19 +1,12 @@
-package com.fghilmany.gofoodclone.register.presentation
+package com.fghilamny.register.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.fghilmany.common.DataResult
-import com.fghilmany.gofoodclone.main.factories.local.LocalPreferenceInsertFactory
-import com.fghilmany.gofoodclone.main.factories.register.RegisterDecoratorFactory
-import com.fghilmany.gofoodclone.main.factories.register.RegisterRemoteInsertFactory
 import com.fghilmany.register.domain.RegisterBody
 import com.fghilmany.register.domain.RegisterData
 import com.fghilmany.register.domain.RegisterInsert
-
 import kotlinx.coroutines.launch
 
 class RegisterViewModel constructor(
@@ -48,16 +41,4 @@ class RegisterViewModel constructor(
         }
     }
 
-    companion object{
-        val FACTORY: ViewModelProvider.Factory = viewModelFactory{
-            initializer {
-                RegisterViewModel(
-                    RegisterDecoratorFactory.createRegisterDecorator(
-                        decorator = RegisterRemoteInsertFactory.createRegisterRemoteInsert(),
-                        cache = LocalPreferenceInsertFactory.createLocalPreferenceInsert()
-                    )
-                )
-            }
-        }
-    }
 }
