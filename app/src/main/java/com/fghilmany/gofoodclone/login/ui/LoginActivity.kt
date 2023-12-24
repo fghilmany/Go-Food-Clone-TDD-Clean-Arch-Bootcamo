@@ -8,8 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.fghilmany.common.DataResult
 import com.fghilmany.gofoodclone.databinding.ActivityLoginBinding
 import com.fghilmany.gofoodclone.home.ui.HomeActivity
-import com.fghilmany.gofoodclone.login.presentation.LoginViewModel
+import com.fghilmany.gofoodclone.main.factories.viewmodel.LoginViewModelFactory
 import com.fghilmany.gofoodclone.register.ui.RegisterActivity
+import com.fghilmany.login.presentation.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,7 +22,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this, LoginViewModel.FACTORY)[LoginViewModel::class.java]
+        viewModel = ViewModelProvider(this, LoginViewModelFactory.createLoginViewModel())[LoginViewModel::class.java]
 
         clickEvent()
         observeData()
