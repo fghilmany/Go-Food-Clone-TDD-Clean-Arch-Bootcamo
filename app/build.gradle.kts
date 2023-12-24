@@ -43,6 +43,7 @@ dependencies {
     // login module
     implementation(project(":login:domain"))
     implementation(project(":login:http"))
+    implementation(project(":login:presentation"))
 
     // register module
     implementation(project(":register:domain"))
