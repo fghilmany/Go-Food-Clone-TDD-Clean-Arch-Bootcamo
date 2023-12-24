@@ -52,7 +52,7 @@ dependencies {
 
     // preference module
     implementation(project(":preference:domain"))
-    implementation(project(":preference:cache"))
+    implementation(project(":preference:local"))
 
     // common module
     implementation(project(":common"))

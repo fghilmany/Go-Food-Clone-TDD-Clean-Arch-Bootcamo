@@ -1,6 +1,6 @@
-package com.fghilmany.preference.cache.usecase
+package com.fghilmany.preference.local.usecase
 
-import com.fghilmany.preference.cache.LocalPreferenceClient
+import com.fghilmany.preference.local.LocalPreferenceClient
 import com.fghilmany.preference.domain.PreferenceLoader
 
 

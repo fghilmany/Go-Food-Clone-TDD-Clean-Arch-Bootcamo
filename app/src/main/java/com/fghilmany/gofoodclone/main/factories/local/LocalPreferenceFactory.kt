@@ -1,8 +1,8 @@
 package com.fghilmany.gofoodclone.main.factories.local
 
 import com.fghilmany.gofoodclone.framework.LocalFactory
-import com.fghilmany.preference.cache.LocalPreference
-import com.fghilmany.preference.cache.LocalPreferenceClient
+import com.fghilmany.preference.local.LocalPreference
+import com.fghilmany.preference.local.LocalPreferenceClient
 
 class LocalPreferenceFactory {
     companion object{

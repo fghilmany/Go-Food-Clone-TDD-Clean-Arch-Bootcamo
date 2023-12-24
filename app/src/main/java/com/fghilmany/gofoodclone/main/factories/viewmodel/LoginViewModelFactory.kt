@@ -15,7 +15,7 @@ class LoginViewModelFactory {
                 LoginViewModel(
                     LoginDecoratorFactory.createLoginDecorator(
                         decorator = LoginRemoteInsertFactory.createLoginRemoteInsert(),
-                        cache = LocalPreferenceInsertFactory.createLocalPreferenceInsert()
+                        local = LocalPreferenceInsertFactory.createLocalPreferenceInsert()
                     )
                 )
             }

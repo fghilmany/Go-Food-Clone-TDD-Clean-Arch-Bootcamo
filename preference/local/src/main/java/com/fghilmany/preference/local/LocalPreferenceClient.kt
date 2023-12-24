@@ -1,4 +1,4 @@
-package com.fghilmany.preference.cache
+package com.fghilmany.preference.local
 
 interface LocalPreferenceClient {
     fun savePreferenceState(isPreference: Boolean)

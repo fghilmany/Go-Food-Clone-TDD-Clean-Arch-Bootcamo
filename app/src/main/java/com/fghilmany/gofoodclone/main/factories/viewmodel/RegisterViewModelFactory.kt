@@ -15,7 +15,7 @@ class RegisterViewModelFactory {
                 RegisterViewModel(
                     RegisterDecoratorFactory.createRegisterDecorator(
                         decorator = RegisterRemoteInsertFactory.createRegisterRemoteInsert(),
-                        cache = LocalPreferenceInsertFactory.createLocalPreferenceInsert()
+                        local = LocalPreferenceInsertFactory.createLocalPreferenceInsert()
                     )
                 )
             }

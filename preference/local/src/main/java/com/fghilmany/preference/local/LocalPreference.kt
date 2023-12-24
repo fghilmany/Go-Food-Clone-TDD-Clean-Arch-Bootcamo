@@ -1,4 +1,4 @@
-package com.fghilmany.preference.cache
+package com.fghilmany.preference.local
 
 import android.content.SharedPreferences
 

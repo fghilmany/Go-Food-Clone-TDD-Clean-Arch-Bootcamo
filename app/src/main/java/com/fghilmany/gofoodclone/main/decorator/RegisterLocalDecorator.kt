@@ -8,15 +8,15 @@ import com.fghilmany.register.domain.RegisterInsert
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class RegisterCacheDecorator(
+class RegisterLocalDecorator(
     private val decorator: RegisterInsert,
-    private val cache: PreferenceInsert
+    private val local: PreferenceInsert
 ): RegisterInsert {
     override fun register(registerBody: RegisterBody): Flow<DataResult<RegisterData>> {
         return flow {
             decorator.register(registerBody).collect{ response ->
                 if (response is DataResult.Success){
-                    cache.insertPreferenceState(true)
+                    local.insertPreferenceState(true)
                 }
                 emit(response)
             }

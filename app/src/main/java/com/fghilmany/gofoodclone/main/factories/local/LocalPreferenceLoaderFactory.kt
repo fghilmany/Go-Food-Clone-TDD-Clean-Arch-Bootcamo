@@ -1,6 +1,6 @@
 package com.fghilmany.gofoodclone.main.factories.local
 
-import com.fghilmany.preference.cache.usecase.LocalPreferenceLoader
+import com.fghilmany.preference.local.usecase.LocalPreferenceLoader
 import com.fghilmany.preference.domain.PreferenceLoader
 
 class LocalPreferenceLoaderFactory {

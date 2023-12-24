@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.fghilmany.preference.cache"
+    namespace = "com.fghilmany.preference.localF"
     compileSdk = 33
 
     defaultConfig {

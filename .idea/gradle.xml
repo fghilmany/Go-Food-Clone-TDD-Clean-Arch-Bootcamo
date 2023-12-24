@@ -16,8 +16,8 @@
             <option value="$PROJECT_DIR$/login/http" />
             <option value="$PROJECT_DIR$/login/presentation" />
             <option value="$PROJECT_DIR$/preference" />
-            <option value="$PROJECT_DIR$/preference/cache" />
             <option value="$PROJECT_DIR$/preference/domain" />
+            <option value="$PROJECT_DIR$/preference/local" />
             <option value="$PROJECT_DIR$/register" />
             <option value="$PROJECT_DIR$/register/domain" />
             <option value="$PROJECT_DIR$/register/http" />

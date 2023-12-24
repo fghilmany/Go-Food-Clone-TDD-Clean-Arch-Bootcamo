@@ -8,15 +8,15 @@ import com.fghilmany.preference.domain.PreferenceInsert
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class LoginCacheDecorator(
+class LoginLocalDecorator(
     private val decorator: LoginInsert,
-    private val cache: PreferenceInsert
+    private val local: PreferenceInsert
 ): LoginInsert {
     override fun login(loginBody: LoginBody): Flow<DataResult<LoginData>> {
         return flow {
             decorator.login(loginBody).collect{ response ->
                 if (response is DataResult.Success){
-                    cache.insertPreferenceState(true)
+                    local.insertPreferenceState(true)
                 }
                 emit(response)
             }
