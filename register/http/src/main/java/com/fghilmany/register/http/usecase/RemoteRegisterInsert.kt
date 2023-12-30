@@ -8,7 +8,7 @@ import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
 import com.fghilmany.common.UnexpectedException
 import com.fghilmany.register.domain.RegisterBody
-import com.fghilmany.register.domain.RegisterData
+import com.fghilmany.register.domain.RegisterUser
 import com.fghilmany.register.domain.RegisterInsert
 import com.fghilmany.register.http.RegisterHttpClient
 import com.fghilmany.register.http.RegisterMapper.Companion.mapToRegisterData
@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.flow
 class RemoteRegisterInsert(
     private val registerHttpClient: RegisterHttpClient
 ): RegisterInsert {
-    override fun register(registerBody: RegisterBody): Flow<DataResult<RegisterData>> {
+    override fun register(registerBody: RegisterBody): Flow<DataResult<RegisterUser>> {
         return flow {
             val body = registerBody.mapToRemoteBody()
             registerHttpClient.register(body).collect{ result ->

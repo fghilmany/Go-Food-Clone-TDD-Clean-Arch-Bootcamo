@@ -4,11 +4,11 @@ import androidx.annotation.VisibleForTesting
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import com.fghilamny.register.presentation.RegisterViewModel
 import com.fghilmany.common.DataResult
 import com.fghilmany.register.domain.RegisterBody
-import com.fghilmany.register.domain.RegisterData
-import com.fghilmany.register.domain.RegisterInsert
 import com.fghilmany.register.domain.RegisterUser
+import com.fghilmany.register.domain.RegisterInsert
 import io.mockk.clearAllMocks
 import io.mockk.confirmVerified
 import io.mockk.every
@@ -184,25 +184,21 @@ class RegisterViewModelTest{
 
     @Test
     fun testLoadSuccessRegister() = runBlocking {
-        val data = RegisterData(
-            "298|Ml5yvMueZ5f1xeg8C2a3h6Iaw6sBJrwMT0lwrOMa",
-            "Bearer",
-            RegisterUser(
-                "https://ui-avatars.com/api/?name=acuy&color=7F9CF5&background=EBF4FF",
-                "Jalan berkah",
-                "Berlin",
-                "USER",
-                "1",
-                1702725827000,
-                null,
-                null,
-                "1",
-                1702725827000,
-                "acuy",
-                133,
-                null,
-                "hightech@gmaisl.com",
-            )
+        val data = RegisterUser(
+            "https://ui-avatars.com/api/?name=acuy&color=7F9CF5&background=EBF4FF",
+            "Jalan berkah",
+            "Berlin",
+            "USER",
+            "1",
+            1702725827000,
+            null,
+            null,
+            "1",
+            1702725827000,
+            "acuy",
+            133,
+            null,
+            "hightech@gmaisl.com",
         )
         expect(
             result = DataResult.Success(data),
@@ -212,7 +208,7 @@ class RegisterViewModelTest{
     }
 
     private fun expect(
-        result: DataResult<RegisterData>,
+        result: DataResult<RegisterUser>,
         sut: RegisterViewModel,
         expectedResult: Any
     ) {

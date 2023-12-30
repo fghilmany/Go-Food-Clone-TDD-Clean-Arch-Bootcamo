@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.fghilmany.common.DataResult
 import com.fghilmany.register.domain.RegisterBody
-import com.fghilmany.register.domain.RegisterData
+import com.fghilmany.register.domain.RegisterUser
 import com.fghilmany.register.domain.RegisterInsert
 import kotlinx.coroutines.launch
 
@@ -15,7 +15,7 @@ class RegisterViewModel constructor(
 
     private lateinit var registerBody: RegisterBody
 
-    private var _register: MutableLiveData<DataResult<RegisterData>> = MutableLiveData()
+    private var _register: MutableLiveData<DataResult<RegisterUser>> = MutableLiveData()
     val register get() = _register
 
     fun setRegisterBody(

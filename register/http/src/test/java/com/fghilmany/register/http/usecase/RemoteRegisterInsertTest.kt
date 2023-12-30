@@ -8,7 +8,6 @@ import com.fghilmany.common.InternalServerErrorException
 import com.fghilmany.common.InvalidDataException
 import com.fghilmany.common.NotFoundExceptionException
 import com.fghilmany.common.UnexpectedException
-import com.fghilmany.register.domain.RegisterData
 import com.fghilmany.register.domain.RegisterUser
 import com.fghilmany.register.http.Meta
 import com.fghilmany.register.http.RegisterHttpClient
@@ -162,25 +161,21 @@ class RemoteRegisterInsertTest{
             "User Registered",
         )
 
-        val remoteRegisterResponse = RegisterData(
-            "298|Ml5yvMueZ5f1xeg8C2a3h6Iaw6sBJrwMT0lwrOMa",
-            "Bearer",
-            RegisterUser(
-                "https://ui-avatars.com/api/?name=acuy&color=7F9CF5&background=EBF4FF",
-                "Jalan berkah",
-                "Berlin",
-                "USER",
-                "1",
-                1702725827000,
-                null,
-                null,
-                "1",
-                1702725827000,
-                "acuy",
-                133,
-                null,
-                "hightech@gmaisl.com",
-            )
+        val remoteRegisterResponse = RegisterUser(
+            "https://ui-avatars.com/api/?name=acuy&color=7F9CF5&background=EBF4FF",
+            "Jalan berkah",
+            "Berlin",
+            "USER",
+            "1",
+            1702725827000,
+            null,
+            null,
+            "1",
+            1702725827000,
+            "acuy",
+            133,
+            null,
+            "hightech@gmaisl.com",
         )
 
         expect(

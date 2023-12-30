@@ -16,9 +16,3 @@ data class RegisterUser(
     val profilePhotoPath: Any? = null,
     val email: String
 )
-
-data class RegisterData(
-    val accessToken: String,
-    val tokenType: String,
-    val registerUser: RegisterUser
-)
