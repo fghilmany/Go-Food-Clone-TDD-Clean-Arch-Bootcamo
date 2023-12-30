@@ -1,20 +1,9 @@
 package com.fghilmany.login.domain
 
-data class Login(
-    val loginData: LoginData,
-    val meta: Meta
-)
-
 data class LoginData(
     val accessToken: String,
     val tokenType: String,
     val user: User
-)
-
-data class Meta(
-    val code: Int,
-    val message: String,
-    val status: String
 )
 
 data class User(

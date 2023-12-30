@@ -1,10 +1,5 @@
 package com.fghilmany.register.domain
 
-data class Register(
-    val registerData: RegisterData,
-    val meta: Meta
-)
-
 data class RegisterUser(
     val profilePhotoUrl: String,
     val address: String,
@@ -26,10 +21,4 @@ data class RegisterData(
     val accessToken: String,
     val tokenType: String,
     val registerUser: RegisterUser
-)
-
-data class Meta(
-    val code: Int,
-    val message: String,
-    val status: String
 )
