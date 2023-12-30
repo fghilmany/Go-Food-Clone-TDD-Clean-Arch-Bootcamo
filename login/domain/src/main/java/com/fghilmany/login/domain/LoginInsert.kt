@@ -4,5 +4,5 @@ import com.fghilmany.common.DataResult
 import kotlinx.coroutines.flow.Flow
 
 interface LoginInsert {
-    fun login(loginBody: LoginBody): Flow<DataResult<LoginData>>
+    fun login(loginBody: LoginBody): Flow<DataResult<LoginUser>>
 }

@@ -2,14 +2,11 @@ package com.fghilmany.login.presentation
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.fghilmany.common.DataResult
 import com.fghilmany.login.domain.LoginBody
 import com.fghilmany.login.domain.LoginInsert
-import com.fghilmany.login.domain.LoginData
+import com.fghilmany.login.domain.LoginUser
 import kotlinx.coroutines.launch
 
 class LoginViewModel constructor(
@@ -18,7 +15,7 @@ class LoginViewModel constructor(
 
     private lateinit var loginBody: LoginBody
 
-    private var _login: MutableLiveData<DataResult<LoginData>> = MutableLiveData()
+    private var _login: MutableLiveData<DataResult<LoginUser>> = MutableLiveData()
     val login get() = _login
 
     fun setLoginBody(email: String, password: String){

@@ -1,8 +1,7 @@
 package com.fghilmany.login.http
 
 import com.fghilmany.login.domain.LoginBody
-import com.fghilmany.login.domain.LoginData
-import com.fghilmany.login.domain.User
+import com.fghilmany.login.domain.LoginUser
 
 class LoginMapper {
     companion object{
@@ -15,29 +14,25 @@ class LoginMapper {
             }
         }
 
-        fun RemoteLoginData.mapToLoginData(): LoginData {
-            return LoginData(
-                accessToken = accessToken,
-                tokenType = tokenType,
-                user = with(remoteUser){
-                    User(
-                        profilePhotoUrl = profilePhotoUrl,
-                        address = address,
-                        city = city,
-                        roles = roles,
-                        houseNumber = houseNumber,
-                        createdAt = createdAt,
-                        emailVerifiedAt = emailVerifiedAt,
-                        currentTeamId = currentTeamId,
-                        phoneNumber = phoneNumber,
-                        updatedAt = updatedAt,
-                        name = name,
-                        id = id,
-                        profilePhotoPath = profilePhotoPath,
-                        email = email
-                    )
-                }
-            )
+        fun RemoteLoginData.mapToLoginData(): LoginUser {
+            return with(this.remoteUser) {
+                LoginUser(
+                    profilePhotoUrl = profilePhotoUrl,
+                    address = address,
+                    city = city,
+                    roles = roles,
+                    houseNumber = houseNumber,
+                    createdAt = createdAt,
+                    emailVerifiedAt = emailVerifiedAt,
+                    currentTeamId = currentTeamId,
+                    phoneNumber = phoneNumber,
+                    updatedAt = updatedAt,
+                    name = name,
+                    id = id,
+                    profilePhotoPath = profilePhotoPath,
+                    email = email
+                )
+            }
         }
     }
 }

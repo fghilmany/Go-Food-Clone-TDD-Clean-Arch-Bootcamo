@@ -4,7 +4,7 @@ import com.fghilmany.common.DataResult
 import com.fghilmany.common.HttpClientResult
 import com.fghilmany.login.domain.LoginBody
 import com.fghilmany.login.domain.LoginInsert
-import com.fghilmany.login.domain.LoginData
+import com.fghilmany.login.domain.LoginUser
 import com.fghilmany.login.http.ConnectivityException
 import com.fghilmany.login.http.InternalServerErrorException
 import com.fghilmany.login.http.InvalidDataException
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.flow
 class RemoteLoginInsert constructor(
     private val loginHttpClient: LoginHttpClient
 ): LoginInsert {
-    override fun login(loginBody: LoginBody): Flow<DataResult<LoginData>> {
+    override fun login(loginBody: LoginBody): Flow<DataResult<LoginUser>> {
         return flow {
             val body = loginBody.mapToRemoteBody()
             loginHttpClient.login(body).collect{result ->

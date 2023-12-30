@@ -1,12 +1,6 @@
 package com.fghilmany.login.domain
 
-data class LoginData(
-    val accessToken: String,
-    val tokenType: String,
-    val user: User
-)
-
-data class User(
+data class LoginUser(
     val profilePhotoUrl: String,
     val address: String,
     val city: String,
